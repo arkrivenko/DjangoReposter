@@ -1,0 +1,14 @@
+{% extends 'tgapp/base.html' %}
+
+{% block title %}
+  Delete channel
+{% endblock %}
+
+{% block body %}
+  <form method="post">
+    {% csrf_token %}
+    <p>Подтверждаете удаление?</p>
+    {{ form }}
+    <input type="submit" value="Удалить">
+</form>
+{% endblock %}

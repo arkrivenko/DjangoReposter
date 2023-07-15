@@ -1,0 +1,35 @@
+{% extends 'tgapp/base.html' %}
+
+{% block title %}
+  Media list
+{% endblock %}
+
+{% block body %}
+  <h1>Medias:</h1>
+  {% if medias %}
+    <div>
+    {% for media in medias %}
+      <div>
+        <p><a href="{% url 'tgapp:media_details' pk=media.pk %}"
+        >#{{ media.pk }}</a></p>
+        <p>{{ media.caption }}</p>
+      </div>
+    {% endfor %}
+    </div>
+    <div>
+    <a href="{% url 'tgapp:media_create' %}"
+      >Create a new media</a>
+    </div>
+
+  {% else %}
+    <h3>No medias yet</h3>
+    <a href="{% url 'tgapp:media_create' %}"
+    >Create a new media</a>
+  {% endif %}
+
+  <div>
+    <a href="{% url 'tgapp:channel_list' %}"
+    >Go to channel list</a>
+  </div>
+
+{% endblock %}

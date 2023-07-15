@@ -1,0 +1,20 @@
+{% extends 'tgapp/base.html' %}
+
+{% block title %}
+  Channel #{{ channel.pk }}
+{% endblock %}
+
+{% block body %}
+  <h1>Channel <strong>#{{ channel.pk }}:</strong></h1>
+  <div>
+    <p>Login: <em>{{ channel.channel_login }}</em></p>
+    <p>Description: <em>{{ channel.description }}</em></p>
+    <p>Created at: <em>{{ channel.created_at }}</em></p>
+  </div>
+  <div>
+    <a href="{% url 'tgapp:channel_delete' pk=channel.pk %}">Delete channel</a>
+  </div>
+  <div>
+    <a href="{% url 'tgapp:channel_list' %}">Back to channel list</a>
+  </div>
+{% endblock %}

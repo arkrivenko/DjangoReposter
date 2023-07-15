@@ -1,0 +1,35 @@
+{% extends 'tgapp/base.html' %}
+
+{% block title %}
+  Channel list
+{% endblock %}
+
+{% block body %}
+  <h1>Channels:</h1>
+  {% if channels %}
+    <div>
+    {% for channel in channels %}
+      <div>
+        <p><a href="{% url 'tgapp:channel_details' pk=channel.pk %}"
+        >#{{ channel.pk }}</a></p>
+        <p>{{ channel.channel_login }}</p>
+      </div>
+    {% endfor %}
+    </div>
+    <div>
+    <a href="{% url 'tgapp:channel_create' %}"
+      >Add a new channel</a>
+    </div>
+
+  {% else %}
+    <h3>No channels yet</h3>
+    <a href="{% url 'tgapp:channel_create' %}"
+    >Add a new channel</a>
+  {% endif %}
+
+  <div>
+    <a href="{% url 'tgapp:media_list' %}"
+    >Go to media list</a>
+  </div>
+
+{% endblock %}

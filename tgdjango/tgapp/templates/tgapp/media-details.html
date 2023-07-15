@@ -1,0 +1,29 @@
+{% extends 'tgapp/base.html' %}
+
+{% block title %}
+  Media #{{ media.pk }}
+{% endblock %}
+
+{% block body %}
+  <h1>Media <strong>#{{ media.pk }}</strong></h1>
+  <div>
+    <p>Время создания задачи: {{ media.created_at }}</p>
+    <p>Время выполнения: {{ media.task_time }}</p>
+    <p>Группы тг:</p>
+    <ul>
+      {% for group in media.tg_groups.all %}
+        <li>{{ group }}</li>
+      {% endfor %}
+    </ul>
+    <p>Заметка: {{ media.description }}</p>
+
+    <img src="{{ media.image.url }}" alt="{{ media.image.filename }}">
+    <p>Текст поста: <em>{{ media.caption }}</em></p>
+  </div>
+  <div>
+    <a href="{% url 'tgapp:media_delete' pk=media.pk %}">Delete media</a>
+  </div>
+  <div>
+    <a href="{% url 'tgapp:media_list' %}">Back to media list</a>
+  </div>
+{% endblock %}
