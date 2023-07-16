@@ -1,3 +1,5 @@
 /tgdjango/db.sqlite3
 /test.py
 /tgdjango/tgapp/management/commands/tg_settings.py
+/.env
+/tgdjango/database/db.sqlite3
