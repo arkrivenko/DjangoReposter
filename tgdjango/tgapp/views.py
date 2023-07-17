@@ -1,9 +1,9 @@
-from django.shortcuts import render, reverse
-from django.views.generic import CreateView, DetailView, ListView, DeleteView
+from django.shortcuts import reverse
+from django.views.generic import CreateView, DetailView, ListView, DeleteView, UpdateView
 from django.urls import reverse_lazy
-from django.http import HttpResponseRedirect
 
 from .models import Mediafile, ChannelData
+from .forms import MediafileForm
 
 
 class ChannelCreateView(CreateView):
@@ -31,8 +31,20 @@ class ChannelDeleteView(DeleteView):
 
 class MediaCreateView(CreateView):
     model = Mediafile
-    fields = "caption", "image", "description", "tg_groups", "task_time"
+    fields = "caption", "image", "description", "tg_groups", "task_time", "period"
     success_url = reverse_lazy("tgapp:media_list")
+
+
+class MediaUpdateView(UpdateView):
+    model = Mediafile
+    template_name_suffix = "_update_form"
+    form_class = MediafileForm
+
+    def get_success_url(self):
+        return reverse(
+            "tgapp:media_details",
+            kwargs={"pk": self.object.pk},
+        )
 
 
 class MediaDeleteView(DeleteView):

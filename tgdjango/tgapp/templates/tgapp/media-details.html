@@ -9,6 +9,7 @@
   <div>
     <p>Время создания задачи: {{ media.created_at }}</p>
     <p>Время выполнения: {{ media.task_time }}</p>
+    <p>Период: {{ media.period }}</p>
     <p>Группы тг:</p>
     <ul>
       {% for group in media.tg_groups.all %}
@@ -19,6 +20,9 @@
 
     <img src="{{ media.image.url }}" alt="{{ media.image.filename }}">
     <p>Текст поста: <em>{{ media.caption }}</em></p>
+  </div>
+  <div>
+    <a href="{% url 'tgapp:media_update' pk=media.pk %}">Update media</a>
   </div>
   <div>
     <a href="{% url 'tgapp:media_delete' pk=media.pk %}">Delete media</a>

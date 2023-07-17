@@ -12,7 +12,10 @@
       <div>
         <p><a href="{% url 'tgapp:media_details' pk=media.pk %}"
         >#{{ media.pk }}</a></p>
+        <p>{{ media.description }}</p>
+        <img src="{{ media.image.url }}" alt="{{ media.image.filename }}">
         <p>{{ media.caption }}</p>
+
       </div>
     {% endfor %}
     </div>

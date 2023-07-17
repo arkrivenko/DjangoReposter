@@ -1,4 +1,6 @@
 from django.db import models
+from django.core.validators import MinValueValidator, MaxValueValidator
+from django.utils import timezone
 from datetime import datetime
 
 
@@ -33,11 +35,14 @@ class ChannelData(models.Model):
 
 
 class Mediafile(models.Model):
-    caption = models.TextField(null=False, max_length=1024)
-    image = models.ImageField(null=False, upload_to=image_directory_path)
-    description = models.TextField(blank=True, null=False, max_length=200)
-    tg_groups = models.ManyToManyField(ChannelData, related_name="telegram_groups")
-    task_time = models.DateTimeField(null=False, default=datetime.now())
+    caption = models.TextField(null=False, max_length=1024, help_text="Подпись к посту")
+    image = models.ImageField(null=False, upload_to=image_directory_path, help_text="Изображение")
+    description = models.TextField(blank=True, null=False, max_length=200, help_text="Описание (в ТГ не выводится)")
+    tg_groups = models.ManyToManyField(ChannelData, related_name="telegram_groups",
+                                       help_text="Группы ТГ, в которых будет размещен пост")
+    task_time = models.DateTimeField(null=False, default=timezone.now, help_text="Время размещения поста")
+    period = models.IntegerField(null=False, validators=[MinValueValidator(1), MaxValueValidator(72)],
+                                 help_text="Период, с которым пост будет размещаться в ТГ")
     created_at = models.DateTimeField(auto_now_add=True)
 
     def delete(self, *args, **kwargs):
