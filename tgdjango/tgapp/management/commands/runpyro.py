@@ -71,6 +71,7 @@ async def main():
                                 continue
 
                         await update_task_time(media_pk=media.pk)
+                        time.sleep(5)
 
             await asyncio.sleep(60)
 
