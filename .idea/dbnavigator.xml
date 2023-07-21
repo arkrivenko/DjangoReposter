@@ -20,7 +20,9 @@
     <last-used-providers />
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
-    <open-files />
+    <open-files>
+      <object connection-id="22c28cee-d822-491e-90d4-866af26b1b31" object-ref="schemas/main/tables/tgapp_mediafile" />
+    </open-files>
   </component>
   <component name="DBNavigator.Project.DatasetFilterManager">
     <filter-actions connection-id="22c28cee-d822-491e-90d4-866af26b1b31" dataset="main.tgapp_channeldata" active-filter-id="EMPTY_FILTER" />
