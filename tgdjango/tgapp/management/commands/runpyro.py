@@ -39,20 +39,25 @@ def update_task_time(media_pk):
     m_task_time = media.task_time
     m_period = media.period
     Mediafile.objects.filter(pk=media_pk).update(
-        task_time=(m_task_time + timedelta(hours=m_period)
+        task_time=(m_task_time + timedelta(minutes=m_period)
                    ))
 
 
 async def main():
-    async with Client("my_account", api_id, api_hash) as app:
+    async with app:
         while True:
             medias = await get_media_list()
+            print(f"medias: {medias}")
             if medias:
                 for media in medias:
+                    print(f"media: {media}")
                     task_time = datetime.strptime(media.task_time.strftime("%Y-%m-%d %H:%M:%S"), "%Y-%m-%d %H:%M:%S")
+                    print(f"task time: {task_time}")
+                    print(f"datetime now: {datetime.now()}")
                     if task_time <= datetime.now():
                         tg_groups = await get_groups_list(media_pk=media.pk)
                         for tg_group in tg_groups:
+                            print(f"tg group: {tg_group}")
                             try:
                                 channel_info = await app.get_chat(tg_group.channel_login)
                                 channel_id = channel_info.id
@@ -70,4 +75,5 @@ async def main():
             await asyncio.sleep(60)
 
 
-asyncio.run(main())
+app = Client("my_account", api_id, api_hash)
+app.run(main())
